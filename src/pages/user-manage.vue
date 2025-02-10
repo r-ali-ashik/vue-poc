@@ -2,7 +2,7 @@
   <div>
     <h1>Manage User</h1>
     <form>
-      <v-text-field v-model="state.name" :counter="10" :error-messages="v$.name.$errors.map(e => e.$message)"
+      <v-text-field v-model="state.name" :counter="10" :error-messages="v$.name.$errors.map(e => e.$message.value)"
         label="Name" required @blur="v$.name.$touch" @input="v$.name.$touch"></v-text-field>
 
       <v-text-field v-model="state.email" :error-messages="v$.email.$errors.map(e => e.$message)" label="E-mail"
@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, toRefs } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { email, required } from '@vuelidate/validators'
 
@@ -33,6 +33,7 @@ const initialState = {
   name: '',
   email: '',
   select: null,
+  items: [],
   checkbox: null,
 }
 
